@@ -1,5 +1,5 @@
 {
-  "name": "typegraphql-nestjs",
+  "name": "@codejamninja/typegraphql-nestjs",
   "version": "0.2.3",
   "author": {
     "name": "Michał Lytek",
