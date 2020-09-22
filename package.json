@@ -78,6 +78,5 @@
   ],
   "engines": {
     "node": ">= 10.3"
-  },
-  "private": true
+  }
 }
