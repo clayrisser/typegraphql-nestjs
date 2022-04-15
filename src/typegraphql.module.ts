@@ -34,6 +34,8 @@ export class TypeGraphQLModule {
   ): DynamicModule {
     const dynamicGraphQLModule = GraphQLModule.forRootAsync({
       driver: options.driver,
+        playground: false,
+    plugins: [ApolloServerPluginLandingPageLocalDefault],
       useClass: TypeGraphQLOptionsFactory as any,
     });
 
@@ -55,6 +57,8 @@ export class TypeGraphQLModule {
   ): DynamicModule {
     const dynamicGraphQLModule = GraphQLModule.forRootAsync({
       driver: options.driver,
+          playground: false,
+    plugins: [ApolloServerPluginLandingPageLocalDefault],
       imports: options.imports,
       useClass: TypeGraphQLOptionsFactory as any,
     });
