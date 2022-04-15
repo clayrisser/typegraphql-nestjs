@@ -1,6 +1,11 @@
 import { Module, DynamicModule } from "@nestjs/common";
 import { GqlModuleOptions, GraphQLModule } from "@nestjs/graphql";
 
+
+
+
+
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 import {
   TYPEGRAPHQL_ROOT_MODULE_OPTIONS,
   TYPEGRAPHQL_FEATURE_MODULE_OPTIONS,
