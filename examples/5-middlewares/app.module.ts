@@ -1,3 +1,4 @@
+import { ApolloDriver } from "@nestjs/apollo";
 import { Module } from "@nestjs/common";
 import { TypeGraphQLModule } from "../../src";
 import { LoggingMiddleware } from "./logging/middleware";
@@ -8,6 +9,7 @@ import LoggingModule from "./logging/module";
 @Module({
   imports: [
     TypeGraphQLModule.forRoot({
+      driver: ApolloDriver,
       emitSchemaFile: true,
       validate: false,
       // register middlewares in settings

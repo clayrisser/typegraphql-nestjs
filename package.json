@@ -1,18 +1,21 @@
 {
-  "name": "typegraphql-nestjs",
+  "name": "@kobbiman/typegraphql-nestjs",
   "version": "0.4.1",
-  "author": {
+  "author": { 
     "name": "Michał Lytek",
     "url": "https://github.com/MichalLytek"
   },
   "scripts": {
     "build": "tsc",
-    "check:type": "tsc --noEmit",
-    "test": "jest"
+    "typecheck": "tsc --noEmit",
+    "typecheck:watch": "pnpm typecheck -- --watch",
+    "test": "jest",
+    "prepublish_": "pnpm build"
   },
   "peerDependencies": {
     "@apollo/federation": "^0.29.0",
     "@apollo/gateway": "^0.38.0",
+    "@apollo/subgraph": "^2.0.1",
     "@nestjs/common": "^8.0.6",
     "@nestjs/core": "^8.0.6",
     "@nestjs/graphql": "^8.0.2",
@@ -24,24 +27,27 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@apollo/federation": "^0.29.0",
-    "@apollo/gateway": "^0.38.0",
+    "@apollo/federation": "^0.36.1",
+    "@apollo/gateway": "^2.0.1",
+    "@nestjs/apollo": "^10.0.9",
     "@nestjs/common": "^8.0.6",
-    "@nestjs/core": "^8.0.6",
-    "@nestjs/graphql": "^8.0.2",
+    "@nestjs/core": "^8.3.1",
+    "@nestjs/graphql": "^10.0.9",
     "@nestjs/platform-fastify": "^8.0.6",
     "@nestjs/testing": "^8.0.6",
-    "@types/jest": "^27.0.1",
-    "@types/node": "^16.6.2",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^17.0.25",
     "apollo-graphql": "^0.9.3",
     "apollo-server-fastify": "^3.1.2",
+    "class-transformer": "^0.5.1",
     "class-validator": "^0.13.1",
-    "graphql": "^15.5.1",
+    "fastify": "^3.27.2",
+    "graphql": "^16.3.0",
     "graphql-tag": "^2.12.5",
     "graphql-tools": "^8.1.0",
-    "husky": "^4.3.8",
+    "husky": "^7.0.4",
     "jest": "^27.0.6",
-    "lint-staged": "^11.1.2",
+    "lint-staged": "^12.3.8",
     "prettier": "^2.3.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.3.0",
@@ -86,7 +92,13 @@
     "graphql"
   ],
   "engines": {
-    "node": ">= 10.3"
+    "node": ">= 14"
   },
+  "files": [
+    "dist",
+    "pnpm-lock.yaml",
+    "tsconfig.json",
+    "typegraphql-logo.png"
+  ],
   "private": true
 }
