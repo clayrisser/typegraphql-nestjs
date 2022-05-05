@@ -1,7 +1,7 @@
 {
-  "name": "@kobbiman/typegraphql-nestjs",
+  "name": "@risserlabs/typegraphql-nestjs",
   "version": "0.4.1",
-  "author": { 
+  "author": {
     "name": "Michał Lytek",
     "url": "https://github.com/MichalLytek"
   },
@@ -24,6 +24,7 @@
     "type-graphql": "^1.1.1"
   },
   "dependencies": {
+    "@apollo/subgraph": "^2.0.2",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
@@ -32,7 +33,7 @@
     "@nestjs/apollo": "^10.0.9",
     "@nestjs/common": "^8.0.6",
     "@nestjs/core": "^8.3.1",
-    "@nestjs/graphql": "^10.0.9",
+    "@nestjs/graphql": "^10.0.11",
     "@nestjs/platform-fastify": "^8.0.6",
     "@nestjs/testing": "^8.0.6",
     "@types/jest": "^27.4.1",
@@ -100,5 +101,8 @@
     "tsconfig.json",
     "typegraphql-logo.png"
   ],
-  "private": true
+  "publishConfig": {
+    "@risserlabs:registry": "https://gitlab.com/api/v4/projects/35919744/packages/npm/",
+    "registry": "https://gitlab.com/api/v4/projects/35919744/packages/npm/"
+  }
 }

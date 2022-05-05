@@ -1,5 +1,5 @@
 import { DynamicModule, Module } from "@nestjs/common";
-import { GraphQLFederationModule } from "@nestjs/graphql";
+import { GraphQLModule } from "@nestjs/graphql";
 
 import OptionsPreparatorService from "./prepare-options.service";
 import {
@@ -8,7 +8,7 @@ import {
 } from "./constants";
 import TypeGraphQLFederationOptionsFactory from "./typegraphql-options-federation.factory";
 import {
-  TypeGraphQLFeatureFedarationModuleOptions,
+  TypeGraphQLFeatureFederationModuleOptions,
   TypeGraphQLRootFederationModuleOptions,
   TypeGraphQLRootFederationModuleAsyncOptions,
 } from "./types";
@@ -18,7 +18,7 @@ export class TypeGraphQLFederationModule {
   private static forFeatureIndex = 1;
 
   static forFeature(
-    options: TypeGraphQLFeatureFedarationModuleOptions = {},
+    options: TypeGraphQLFeatureFederationModuleOptions = {},
   ): DynamicModule {
     const token = `${TYPEGRAPHQL_FEATURE_FEDERATION_MODULE_OPTIONS}_${this
       .forFeatureIndex++}`;
@@ -30,9 +30,9 @@ export class TypeGraphQLFederationModule {
   }
 
   static forRoot(
-    options: TypeGraphQLRootFederationModuleOptions = {},
+    options: TypeGraphQLRootFederationModuleOptions<any> = {},
   ): DynamicModule {
-    const dynamicGraphQLModule = GraphQLFederationModule.forRootAsync({
+    const dynamicGraphQLModule = GraphQLModule.forRootAsync({
       useClass: TypeGraphQLFederationOptionsFactory,
     });
     return {
@@ -49,9 +49,9 @@ export class TypeGraphQLFederationModule {
   }
 
   static forRootAsync(
-    options: TypeGraphQLRootFederationModuleAsyncOptions,
+    options: TypeGraphQLRootFederationModuleAsyncOptions<any>,
   ): DynamicModule {
-    const dynamicGraphQLModule = GraphQLFederationModule.forRootAsync({
+    const dynamicGraphQLModule = GraphQLModule.forRootAsync({
       imports: options.imports,
       useClass: TypeGraphQLFederationOptionsFactory,
     });

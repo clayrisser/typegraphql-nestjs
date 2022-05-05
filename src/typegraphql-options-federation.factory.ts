@@ -1,5 +1,6 @@
-import { buildFederatedSchema, printSchema } from "@apollo/federation";
-import federationDirectives from "@apollo/federation/dist/directives";
+import { buildFederatedSchema } from "@apollo/federation";
+import { printSchema } from "graphql";
+import { federationDirectives } from "@apollo/subgraph/dist/directives";
 import { Inject, Injectable } from "@nestjs/common";
 import { GqlModuleOptions, GqlOptionsFactory } from "@nestjs/graphql";
 import { GraphQLResolverMap, addResolversToSchema } from "apollo-graphql";
@@ -19,7 +20,7 @@ import {
 } from "./constants";
 import {
   TypeGraphQLRootFederationModuleOptions,
-  TypeGraphQLFeatureFedarationModuleOptions,
+  TypeGraphQLFeatureFederationModuleOptions,
 } from "./types";
 
 @Injectable()
@@ -28,7 +29,7 @@ export default class TypeGraphQLFederationOptionsFactory
 {
   constructor(
     @Inject(TYPEGRAPHQL_ROOT_FEDERATION_MODULE_OPTIONS)
-    private readonly rootModuleOptions: TypeGraphQLRootFederationModuleOptions,
+    private readonly rootModuleOptions: TypeGraphQLRootFederationModuleOptions<any>,
     private readonly optionsPreparatorService: OptionsPreparatorService,
   ) {}
 
@@ -39,7 +40,7 @@ export default class TypeGraphQLFederationOptionsFactory
       container,
       orphanedTypes,
       featureModuleOptionsArray,
-    } = this.optionsPreparatorService.prepareOptions<TypeGraphQLFeatureFedarationModuleOptions>(
+    } = this.optionsPreparatorService.prepareOptions<TypeGraphQLFeatureFederationModuleOptions>(
       TYPEGRAPHQL_FEATURE_FEDERATION_MODULE_OPTIONS,
       globalMiddlewares,
     );
