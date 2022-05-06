@@ -1,6 +1,6 @@
 {
   "name": "@risserlabs/typegraphql-nestjs",
-  "version": "0.4.1",
+  "version": "0.4.1-0",
   "author": {
     "name": "Michał Lytek",
     "url": "https://github.com/MichalLytek"
@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@apollo/subgraph": "^2.0.2",
-    "tslib": "^2.3.1"
+    "tslib": "^2.4.0"
   },
   "devDependencies": {
     "@apollo/federation": "^0.36.1",
