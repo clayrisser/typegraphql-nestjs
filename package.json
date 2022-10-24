@@ -122,8 +122,8 @@
     "type-graphql": "^1.1.1"
   },
   "publishConfig": {
-    "@risserlabs:registry": "https://gitlab.com/api/v4/projects/35919744/packages/npm/",
-    "registry": "https://gitlab.com/api/v4/projects/35919744/packages/npm/"
+    "@risserlabs:registry": "https://gitlab.com/api/v4/projects/40483025/packages/npm/",
+    "registry": "https://gitlab.com/api/v4/projects/40483025/packages/npm/"
   },
   "engines": {
     "node": ">=14.0.0"
