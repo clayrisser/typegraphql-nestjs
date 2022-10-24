@@ -1,8 +1,8 @@
-import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
-import { Module } from "@nestjs/common";
-import { TypeGraphQLModule } from "../../src";
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { Module } from '@nestjs/common';
+import { TypeGraphQLModule } from '../../src';
 
-import RecipeModule from "./recipe/module";
+import RecipeModule from './recipe/module';
 
 @Module({
   imports: [

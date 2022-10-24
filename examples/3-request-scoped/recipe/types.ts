@@ -1,7 +1,7 @@
-import { ObjectType, Field, InputType } from "type-graphql";
+import { ObjectType, Field, InputType } from 'type-graphql';
 
 @ObjectType()
-@InputType("RecipeInput")
+@InputType('RecipeInput')
 export class Recipe {
   @Field()
   title!: string;
@@ -12,6 +12,6 @@ export class Recipe {
 
 @ObjectType()
 export class AddRecipeResult {
-  @Field(type => [Recipe])
+  @Field((type) => [Recipe])
   recipes!: Recipe[];
 }

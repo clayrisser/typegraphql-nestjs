@@ -1,21 +1,21 @@
-import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
-import { Test } from "@nestjs/testing";
-import { Resolver, Query } from "type-graphql";
-import fs from "fs/promises";
-import path from "path";
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { Test } from '@nestjs/testing';
+import { Resolver, Query } from 'type-graphql';
+import fs from 'fs/promises';
+import path from 'path';
 
-import { TypeGraphQLModule } from "../src/typegraphql.module";
+import { TypeGraphQLModule } from '../src/typegraphql.module';
 
-describe("Providers name checking", () => {
+describe('Providers name checking', () => {
   afterAll(async () => {
-    return fs.unlink(path.join(__dirname, "../schema.gql"));
+    return fs.unlink(path.join(__dirname, '../schema.gql'));
   });
 
   @Resolver()
   class HelloResolver {
     @Query(() => String)
     async hello(): Promise<String> {
-      return "Hello";
+      return 'Hello';
     }
   }
 
@@ -23,11 +23,11 @@ describe("Providers name checking", () => {
   class WorldResolver {
     @Query(() => String)
     async world(): Promise<String> {
-      return "World!";
+      return 'World!';
     }
   }
 
-  it("should consider providers with Symbol names", async () => {
+  it('should consider providers with Symbol names', async () => {
     const module = await Test.createTestingModule({
       imports: [
         TypeGraphQLModule.forRoot<ApolloDriverConfig>({
@@ -40,15 +40,12 @@ describe("Providers name checking", () => {
         WorldResolver,
         {
           provide: Symbol(`SOME_DESCRIPTION`),
-          useValue: { some: "options" },
+          useValue: { some: 'options' },
         },
       ],
     }).compile();
 
-    const generatedSchema = await fs.readFile(
-      path.join(__dirname, "../schema.gql"),
-      "utf-8",
-    );
+    const generatedSchema = await fs.readFile(path.join(__dirname, '../schema.gql'), 'utf-8');
 
     expect(generatedSchema).toMatchInlineSnapshot(`
       "# -----------------------------------------------

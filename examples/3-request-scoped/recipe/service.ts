@@ -1,6 +1,6 @@
-import { Injectable, Scope } from "@nestjs/common";
+import { Injectable, Scope } from '@nestjs/common';
 
-import { Recipe } from "./types";
+import { Recipe } from './types';
 
 @Injectable({ scope: Scope.REQUEST })
 export default class RecipeService {

@@ -36,12 +36,12 @@ The first one is `TypeGraphQLModule.forRoot()` which you should call on your roo
 The only difference is that as its argument you can provide [typical TypeGraphQL `buildSchema` options](https://typegraphql.com/docs/bootstrap.html) like `emitSchemaFile` or `authChecker` apart from the [standard `GqlModuleOptions` from `@nestjs/graphql`](https://docs.nestjs.com/graphql/quick-start#installation) like `installSubscriptionHandlers` or `context`:
 
 ```ts
-import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
-import { Module } from "@nestjs/common";
-import { TypeGraphQLModule } from "typegraphql-nestjs";
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { Module } from '@nestjs/common';
+import { TypeGraphQLModule } from 'typegraphql-nestjs';
 
-import RecipeModule from "./recipe/module";
-import { authChecker } from "./auth";
+import RecipeModule from './recipe/module';
+import { authChecker } from './auth';
 
 @Module({
   imports: [
@@ -50,7 +50,7 @@ import { authChecker } from "./auth";
       emitSchemaFile: true,
       validate: false,
       authChecker,
-      dateScalarMode: "timestamp",
+      dateScalarMode: 'timestamp',
       context: ({ req }) => ({ currentUser: req.user }),
     }),
     RecipeModule,
@@ -62,10 +62,10 @@ export default class AppModule {}
 Then, inside the imported modules (like `RecipeModule`) you just need to register the resolvers classes in the module `providers` array:
 
 ```ts
-import { Module } from "@nestjs/common";
+import { Module } from '@nestjs/common';
 
-import RecipeResolver from "./resolver";
-import RecipeService from "./service";
+import RecipeResolver from './resolver';
+import RecipeService from './service';
 
 @Module({
   providers: [RecipeResolver, RecipeService],
@@ -82,12 +82,12 @@ Notice that the resolvers classes are automatically inferred from your submodule
 In case of need to provide `orphanedTypes` setting, you should use `TypeGraphQLModule.forFeature()`. The recommended place for that is in the module where the orphaned type (like `SuperRecipe`) belongs:
 
 ```ts
-import { Module } from "@nestjs/common";
-import { TypeGraphQLModule } from "typegraphql-nestjs";
+import { Module } from '@nestjs/common';
+import { TypeGraphQLModule } from 'typegraphql-nestjs';
 
-import RecipeResolver from "./resolver";
-import RecipeService from "./service";
-import { SuperRecipe } from "./types";
+import RecipeResolver from './resolver';
+import RecipeService from './service';
+import { SuperRecipe } from './types';
 
 @Module({
   imports: [
@@ -120,9 +120,8 @@ Example of using the config service to generate `TypeGraphQLModule` options:
         debug: config.isDevelopmentMode,
         playground: !config.isDevelopmentMode,
         validate: false,
-        dateScalarMode: "timestamp",
-        emitSchemaFile:
-          config.isDevelopmentMode && path.resolve(__dirname, "schema.gql"),
+        dateScalarMode: 'timestamp',
+        emitSchemaFile: config.isDevelopmentMode && path.resolve(__dirname, 'schema.gql'),
       }),
     }),
   ],
@@ -139,9 +138,7 @@ However, Apollo Federation requires building a federated GraphQL schema, hence y
 The usage is really similar to the basic `TypeGraphQLModule` - the only different is that `.forFeature()` method has an option to provide `referenceResolvers` object which is needed in some cases of Apollo Federation:
 
 ```ts
-function resolveUserReference(
-  reference: Pick<User, "id">,
-): Promise<User | undefined> {
+function resolveUserReference(reference: Pick<User, 'id'>): Promise<User | undefined> {
   return db.users.find({ id: reference.id });
 }
 

@@ -1,12 +1,12 @@
-import { Directive, ObjectType, Field, ID } from "type-graphql";
+import { Directive, ObjectType, Field, ID } from 'type-graphql';
 
-import User from "../user/user";
-import Product from "../product/product";
+import User from '../user/user';
+import Product from '../product/product';
 
 @Directive(`@key(fields: "id")`)
 @ObjectType()
 export default class Review {
-  @Field(type => ID)
+  @Field((type) => ID)
   id!: string;
 
   @Field()

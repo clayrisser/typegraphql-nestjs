@@ -1,9 +1,9 @@
-import { Module } from "@nestjs/common";
-import { TypeGraphQLFederationModule } from "../../../src";
+import { Module } from '@nestjs/common';
+import { TypeGraphQLFederationModule } from '../../../src';
 
-import AccountsResolver from "./resolver";
-import User from "./user";
-import { resolveUserReference } from "./user-reference";
+import AccountsResolver from './resolver';
+import User from './user';
+import { resolveUserReference } from './user-reference';
 
 @Module({
   imports: [

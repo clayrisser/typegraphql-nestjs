@@ -1,6 +1,6 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { Recipe } from "./types";
+import { Recipe } from './types';
 
 @Injectable()
 export default class RecipeService {

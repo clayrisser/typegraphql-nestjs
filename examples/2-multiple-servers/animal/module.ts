@@ -1,9 +1,9 @@
-import { Module } from "@nestjs/common";
-import { TypeGraphQLModule } from "../../../src";
+import { Module } from '@nestjs/common';
+import { TypeGraphQLModule } from '../../../src';
 
-import AnimalResolver from "./resolver";
-import AnimalService from "./service";
-import { SuperAnimal } from "./types";
+import AnimalResolver from './resolver';
+import AnimalService from './service';
+import { SuperAnimal } from './types';
 
 @Module({
   imports: [

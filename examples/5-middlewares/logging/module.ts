@@ -1,7 +1,7 @@
-import { Module } from "@nestjs/common";
-import { LoggingMiddleware } from "./middleware";
+import { Module } from '@nestjs/common';
+import { LoggingMiddleware } from './middleware';
 
-import { LoggingService } from "./service";
+import { LoggingService } from './service';
 
 @Module({
   providers: [

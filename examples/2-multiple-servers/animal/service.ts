@@ -1,6 +1,6 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 
-import { Animal } from "./types";
+import { Animal } from './types';
 
 @Injectable()
 export default class AnimalService {

@@ -1,18 +1,12 @@
-import { Injectable, Inject } from "@nestjs/common";
-import { GqlOptionsFactory, GqlModuleOptions } from "@nestjs/graphql";
-import { buildSchema, ClassType, NonEmptyArray } from "type-graphql";
-import { mergeSchemas } from '@graphql-tools/schema'
+import { Injectable, Inject } from '@nestjs/common';
+import { GqlOptionsFactory, GqlModuleOptions } from '@nestjs/graphql';
+import { buildSchema, ClassType, NonEmptyArray } from 'type-graphql';
+import { mergeSchemas } from '@graphql-tools/schema';
 
-import {
-  TYPEGRAPHQL_ROOT_MODULE_OPTIONS,
-  TYPEGRAPHQL_FEATURE_MODULE_OPTIONS,
-} from "./constants";
-import {
-  TypeGraphQLRootModuleOptions,
-  TypeGraphQLFeatureModuleOptions,
-} from "./types";
-import OptionsPreparatorService from "./prepare-options.service";
-import { GraphQLSchema } from "graphql/type";
+import { TYPEGRAPHQL_ROOT_MODULE_OPTIONS, TYPEGRAPHQL_FEATURE_MODULE_OPTIONS } from './constants';
+import { TypeGraphQLRootModuleOptions, TypeGraphQLFeatureModuleOptions } from './types';
+import OptionsPreparatorService from './prepare-options.service';
+import { GraphQLSchema } from 'graphql/type';
 
 @Injectable()
 export default class TypeGraphQLOptionsFactory implements GqlOptionsFactory {
@@ -22,7 +16,7 @@ export default class TypeGraphQLOptionsFactory implements GqlOptionsFactory {
     private readonly optionsPreparatorService: OptionsPreparatorService,
   ) {}
 
-  async createGqlOptions(): Promise<Omit<GqlModuleOptions, "driver">> {
+  async createGqlOptions(): Promise<Omit<GqlModuleOptions, 'driver'>> {
     const { globalMiddlewares, transformSchema } = this.rootModuleOptions;
     const { resolversClasses, container, orphanedTypes } =
       this.optionsPreparatorService.prepareOptions<TypeGraphQLFeatureModuleOptions>(
@@ -40,10 +34,10 @@ export default class TypeGraphQLOptionsFactory implements GqlOptionsFactory {
     const transformSchemaInternal = async (executableSchema: GraphQLSchema): Promise<GraphQLSchema> => {
       const transformedSchemaInternal = executableSchema
         ? mergeSchemas({ schemas: [schema, executableSchema] })
-        : schema
+        : schema;
 
-      return transformSchema ? transformSchema(transformedSchemaInternal) : transformedSchemaInternal
-    }
+      return transformSchema ? transformSchema(transformedSchemaInternal) : transformedSchemaInternal;
+    };
 
     return {
       ...this.rootModuleOptions,

@@ -1,27 +1,21 @@
-import { Module, DynamicModule } from "@nestjs/common";
-import { GqlModuleOptions, GraphQLModule } from "@nestjs/graphql";
+import { Module, DynamicModule } from '@nestjs/common';
+import { GqlModuleOptions, GraphQLModule } from '@nestjs/graphql';
 
-import {
-  TYPEGRAPHQL_FEATURE_FEDERATION_MODULE_OPTIONS,
-  TYPEGRAPHQL_ROOT_FEDERATION_MODULE_OPTIONS,
-} from "./constants";
-import OptionsPreparatorService from "./prepare-options.service";
-import TypeGraphQLFederationOptionsFactory from "./typegraphql-options-federation.factory";
+import { TYPEGRAPHQL_FEATURE_FEDERATION_MODULE_OPTIONS, TYPEGRAPHQL_ROOT_FEDERATION_MODULE_OPTIONS } from './constants';
+import OptionsPreparatorService from './prepare-options.service';
+import TypeGraphQLFederationOptionsFactory from './typegraphql-options-federation.factory';
 import {
   TypeGraphQLFeatureFederationModuleOptions,
   TypeGraphQLRootFederationModuleOptions,
   TypeGraphQLRootFederationModuleAsyncOptions,
-} from "./types";
+} from './types';
 
 @Module({})
 export class TypeGraphQLFederationModule {
   private static forFeatureIndex = 1;
 
-  static forFeature(
-    options: TypeGraphQLFeatureFederationModuleOptions = {},
-  ): DynamicModule {
-    const token = `${TYPEGRAPHQL_FEATURE_FEDERATION_MODULE_OPTIONS}_${this
-      .forFeatureIndex++}`;
+  static forFeature(options: TypeGraphQLFeatureFederationModuleOptions = {}): DynamicModule {
+    const token = `${TYPEGRAPHQL_FEATURE_FEDERATION_MODULE_OPTIONS}_${this.forFeatureIndex++}`;
     return {
       module: TypeGraphQLFederationModule,
       providers: [{ provide: token, useValue: options }],

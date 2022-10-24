@@ -1,51 +1,51 @@
-import Review from "./review";
-import User from "../user/user";
-import Product from "../product/product";
+import Review from './review';
+import User from '../user/user';
+import Product from '../product/product';
 
 export const reviews: Review[] = [
   createReview({
-    id: "1",
+    id: '1',
     author: createUser({
-      id: "1",
-      username: "@ada",
+      id: '1',
+      username: '@ada',
     }),
     product: createProduct({
-      upc: "1",
+      upc: '1',
     }),
-    body: "Love it!",
+    body: 'Love it!',
   }),
   createReview({
-    id: "2",
+    id: '2',
     author: createUser({
-      id: "1",
-      username: "@ada",
+      id: '1',
+      username: '@ada',
     }),
     product: createProduct({
-      upc: "2",
+      upc: '2',
     }),
-    body: "Too expensive.",
+    body: 'Too expensive.',
   }),
   createReview({
-    id: "3",
+    id: '3',
     author: createUser({
-      id: "2",
-      username: "@complete",
+      id: '2',
+      username: '@complete',
     }),
     product: createProduct({
-      upc: "3",
+      upc: '3',
     }),
-    body: "Could be better.",
+    body: 'Could be better.',
   }),
   createReview({
-    id: "4",
+    id: '4',
     author: createUser({
-      id: "2",
-      username: "@complete",
+      id: '2',
+      username: '@complete',
     }),
     product: createProduct({
-      upc: "1",
+      upc: '1',
     }),
-    body: "Prefer something else.",
+    body: 'Prefer something else.',
   }),
 ];
 

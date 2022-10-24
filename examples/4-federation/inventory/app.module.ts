@@ -1,8 +1,8 @@
-import { Module } from "@nestjs/common";
-import { TypeGraphQLFederationModule } from "../../../src";
+import { Module } from '@nestjs/common';
+import { TypeGraphQLFederationModule } from '../../../src';
 
-import InventoryModule from "./inventory.module";
-import { ApolloFederationDriver, ApolloFederationDriverConfig } from "@nestjs/apollo";
+import InventoryModule from './inventory.module';
+import { ApolloFederationDriver, ApolloFederationDriverConfig } from '@nestjs/apollo';
 
 @Module({
   imports: [

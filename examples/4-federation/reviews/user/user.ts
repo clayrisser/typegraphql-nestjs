@@ -1,14 +1,14 @@
-import { Directive, ObjectType, Field, ID } from "type-graphql";
+import { Directive, ObjectType, Field, ID } from 'type-graphql';
 
-@Directive("@extends")
+@Directive('@extends')
 @Directive(`@key(fields: "id")`)
 @ObjectType()
 export default class User {
-  @Directive("@external")
-  @Field(type => ID)
+  @Directive('@external')
+  @Field((type) => ID)
   id!: string;
 
-  @Directive("@external")
+  @Directive('@external')
   @Field()
   username!: string;
 }

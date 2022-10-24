@@ -1,11 +1,8 @@
-import "reflect-metadata";
+import 'reflect-metadata';
 
-import { Module } from "@nestjs/common";
+import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import {
-  ApolloGatewayDriver,
-  ApolloGatewayDriverConfig,
-} from '@nestjs/apollo';
+import { ApolloGatewayDriver, ApolloGatewayDriverConfig } from '@nestjs/apollo';
 
 @Module({
   imports: [
@@ -16,10 +13,10 @@ import {
       },
       gateway: {
         serviceList: [
-          { name: "accounts", url: "http://localhost:3001/graphql" },
-          { name: "inventory", url: "http://localhost:3002/graphql" },
-          { name: "products", url: "http://localhost:3003/graphql" },
-          { name: "reviews", url: "http://localhost:3004/graphql" },
+          { name: 'accounts', url: 'http://localhost:3001/graphql' },
+          { name: 'inventory', url: 'http://localhost:3002/graphql' },
+          { name: 'products', url: 'http://localhost:3003/graphql' },
+          { name: 'reviews', url: 'http://localhost:3004/graphql' },
         ],
       },
     }),

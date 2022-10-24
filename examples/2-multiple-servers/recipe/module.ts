@@ -1,9 +1,9 @@
-import { Module } from "@nestjs/common";
-import { TypeGraphQLModule } from "../../../src";
+import { Module } from '@nestjs/common';
+import { TypeGraphQLModule } from '../../../src';
 
-import RecipeResolver from "./resolver";
-import RecipeService from "./service";
-import { SuperRecipe } from "./types";
+import RecipeResolver from './resolver';
+import RecipeService from './service';
+import { SuperRecipe } from './types';
 
 @Module({
   imports: [

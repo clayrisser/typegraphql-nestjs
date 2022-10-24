@@ -1,11 +1,11 @@
-import { Resolver, FieldResolver, Directive, Root } from "type-graphql";
+import { Resolver, FieldResolver, Directive, Root } from 'type-graphql';
 
-import Product from "./product";
+import Product from './product';
 
-@Resolver(of => Product)
+@Resolver((of) => Product)
 export default class InventoryResolver {
   @Directive(`@requires(fields: "price weight")`)
-  @FieldResolver(returns => Number)
+  @FieldResolver((returns) => Number)
   async shippingEstimate(@Root() product: Product): Promise<number> {
     // free for expensive items
     if (product.price > 1000) {

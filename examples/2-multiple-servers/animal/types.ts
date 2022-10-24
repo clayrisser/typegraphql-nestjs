@@ -1,12 +1,12 @@
-import { ObjectType, Field, Int, InputType } from "type-graphql";
+import { ObjectType, Field, Int, InputType } from 'type-graphql';
 
 @ObjectType()
-@InputType("AnimalInput")
+@InputType('AnimalInput')
 export class Animal {
   @Field()
   name!: string;
 
-  @Field(type => Int)
+  @Field((type) => Int)
   weight!: number;
 }
 

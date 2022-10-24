@@ -1,32 +1,20 @@
-import { Module, DynamicModule } from "@nestjs/common";
-import { GqlModuleOptions, GraphQLModule } from "@nestjs/graphql";
-
-
-
-
-
-import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
-import {
-  TYPEGRAPHQL_ROOT_MODULE_OPTIONS,
-  TYPEGRAPHQL_FEATURE_MODULE_OPTIONS,
-} from "./constants";
-import OptionsPreparatorService from "./prepare-options.service";
-import TypeGraphQLOptionsFactory from "./typegraphql-options.factory";
+import { GqlModuleOptions, GraphQLModule } from '@nestjs/graphql';
+import { Module, DynamicModule } from '@nestjs/common';
+import OptionsPreparatorService from './prepare-options.service';
+import TypeGraphQLOptionsFactory from './typegraphql-options.factory';
+import { TYPEGRAPHQL_ROOT_MODULE_OPTIONS, TYPEGRAPHQL_FEATURE_MODULE_OPTIONS } from './constants';
 import {
   TypeGraphQLFeatureModuleOptions,
-  TypeGraphQLRootModuleOptions,
   TypeGraphQLRootModuleAsyncOptions,
-} from "./types";
+  TypeGraphQLRootModuleOptions,
+} from './types';
 
 @Module({})
 export class TypeGraphQLModule {
   private static forFeatureIndex = 1;
 
-  static forFeature(
-    options: TypeGraphQLFeatureModuleOptions = {},
-  ): DynamicModule {
-    const token = `${TYPEGRAPHQL_FEATURE_MODULE_OPTIONS}_${this
-      .forFeatureIndex++}`;
+  static forFeature(options: TypeGraphQLFeatureModuleOptions = {}): DynamicModule {
+    const token = `${TYPEGRAPHQL_FEATURE_MODULE_OPTIONS}_${this.forFeatureIndex++}`;
     return {
       module: TypeGraphQLModule,
       providers: [{ provide: token, useValue: options }],
@@ -39,8 +27,6 @@ export class TypeGraphQLModule {
   ): DynamicModule {
     const dynamicGraphQLModule = GraphQLModule.forRootAsync({
       driver: options.driver,
-        playground: false,
-    plugins: [ApolloServerPluginLandingPageLocalDefault],
       useClass: TypeGraphQLOptionsFactory as any,
     });
 
@@ -62,8 +48,6 @@ export class TypeGraphQLModule {
   ): DynamicModule {
     const dynamicGraphQLModule = GraphQLModule.forRootAsync({
       driver: options.driver,
-          playground: false,
-    plugins: [ApolloServerPluginLandingPageLocalDefault],
       imports: options.imports,
       useClass: TypeGraphQLOptionsFactory as any,
     });
