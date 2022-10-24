@@ -38,6 +38,9 @@ export JEST ?= $(call yarn_binary,jest)
 export PRETTIER ?= $(call yarn_binary,prettier)
 export TSC ?= $(call yarn_binary,tsc)
 
+export NPM_AUTH_TOKEN ?= $(shell $(CAT) $(HOME)/.docker/config.json | \
+	$(JQ) -r '.auths["registry.gitlab.com"].auth' | $(BASE64_NOWRAP) -d | $(CUT) -d':' -f2)
+
 ACTIONS += install
 $(ACTION)/install: package.json
 	@$(YARN) install $(ARGS)
