@@ -5,6 +5,7 @@ import { LoggingMiddleware } from "./logging/middleware";
 
 import RecipeModule from "./recipe/module";
 import LoggingModule from "./logging/module";
+import { ApolloDriver } from "@nestjs/apollo";
 
 @Module({
   imports: [
