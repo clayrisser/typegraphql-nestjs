@@ -44,15 +44,6 @@ module.exports = {
     'max-lines-per-function': ['warn', 99],
     '@typescript-eslint/lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
     'no-empty-function': ['warn', { allow: ['constructors'] }],
-    '@typescript-eslint/no-unused-vars': [
-      'warn',
-      {
-        args: 'after-used',
-        argsIgnorePattern: '^_',
-        ignoreRestSiblings: true,
-        vars: 'all',
-      },
-    ],
     'spellcheck/spell-checker': [
       'warn',
       {
@@ -72,5 +63,6 @@ module.exports = {
     'max-params': 'off',
     'no-param-reassign': 'off',
     'no-promise-executor-return': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
   },
 };

@@ -38,7 +38,7 @@ export JEST ?= $(call yarn_binary,jest)
 export PRETTIER ?= $(call yarn_binary,prettier)
 export TSC ?= $(call yarn_binary,tsc)
 
-export NPM_AUTH_TOKEN ?= $(shell $(CAT) $(HOME)/.docker/config.json | \
+export NPM_AUTH_TOKEN ?= $(shell $(CAT) $(HOME)/.docker/config.json 2>$(NULL) | \
 	$(JQ) -r '.auths["registry.gitlab.com"].auth' | $(BASE64_NOWRAP) -d | $(CUT) -d':' -f2)
 
 ACTIONS += install
@@ -122,6 +122,12 @@ clean: ##
 		$(MKPM_GIT_CLEAN_FLAGS) \
 		$(YARN_GIT_CLEAN_FLAGS) \
 		$(NOFAIL)
+
+.PHONY: get-misspelled
+get-misspelled:
+	@$(MAKE) +lint | $(GREP) -oE 'You have a misspelled word: [^ ]+' | \
+		$(SED) 's|.\+: ||g' | $(TR) '[:upper:]' '[:lower:]' | \
+		$(SORT) | $(UNIQ) | $(SED) 's|\(.*\)|"\1",|g'
 
 -include $(call actions)
 
