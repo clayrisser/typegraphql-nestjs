@@ -1,6 +1,6 @@
 {
   "name": "@risserlabs/typegraphql-nestjs",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Basic integration of TypeGraphQL in NestJS. Allows to use TypeGraphQL features while integrating with NestJS modules system and dependency injector.",
   "keywords": [
     "type-graphql",
@@ -66,8 +66,8 @@
   },
   "devDependencies": {
     "@apollo/federation": "^0.37.1",
-    "@apollo/gateway": "^0.50.0",
-    "@apollo/subgraph": "^0.4.0",
+    "@apollo/gateway": "^2.1.4",
+    "@apollo/subgraph": "^2.1.4",
     "@babel/cli": "^7.19.3",
     "@babel/core": "^7.19.6",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
@@ -85,8 +85,8 @@
     "@types/eslint": "^8.4.7",
     "@types/jest": "^29.2.0",
     "@types/node": "^18.11.4",
-    "@typescript-eslint/eslint-plugin": "^5.40.1",
-    "@typescript-eslint/parser": "^5.40.1",
+    "@typescript-eslint/eslint-plugin": "^5.41.0",
+    "@typescript-eslint/parser": "^5.41.0",
     "apollo-server-fastify": "^3.10.3",
     "babel-plugin-macros": "^3.1.0",
     "babel-plugin-module-resolver": "^4.1.0",
