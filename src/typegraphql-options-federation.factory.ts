@@ -1,11 +1,15 @@
-import { buildFederatedSchema } from "@apollo/federation";
-import { printSchema } from "graphql";
-import { federationDirectives } from "@apollo/subgraph/dist/directives";
+import { directivesWithNoDefinitionNeeded } from "@apollo/subgraph/dist/directives";
+import { printSubgraphSchema, buildSubgraphSchema } from "@apollo/subgraph";
+import {
+  addResolversToSchema,
+  GraphQLResolverMap,
+} from "@apollo/subgraph/dist/schema-helper";
+import { mergeSchemas } from "@graphql-tools/schema";
 import { Inject, Injectable } from "@nestjs/common";
 import { GqlModuleOptions, GqlOptionsFactory } from "@nestjs/graphql";
-import { GraphQLResolverMap, addResolversToSchema } from "apollo-graphql";
-import { specifiedDirectives } from "graphql";
+import { GraphQLSchema, specifiedDirectives } from "graphql";
 import gql from "graphql-tag";
+
 import {
   buildSchema,
   ClassType,
@@ -29,12 +33,12 @@ export default class TypeGraphQLFederationOptionsFactory
 {
   constructor(
     @Inject(TYPEGRAPHQL_ROOT_FEDERATION_MODULE_OPTIONS)
-    private readonly rootModuleOptions: TypeGraphQLRootFederationModuleOptions<any>,
+    private readonly rootModuleOptions: TypeGraphQLRootFederationModuleOptions<GqlModuleOptions>,
     private readonly optionsPreparatorService: OptionsPreparatorService,
   ) {}
 
-  async createGqlOptions(): Promise<GqlModuleOptions> {
-    const { globalMiddlewares } = this.rootModuleOptions;
+  async createGqlOptions(): Promise<Omit<GqlModuleOptions, "driver">> {
+    const { globalMiddlewares, transformSchema } = this.rootModuleOptions;
     const {
       resolversClasses,
       container,
@@ -60,14 +64,14 @@ export default class TypeGraphQLFederationOptionsFactory
 
     const baseSchema = await buildSchema({
       ...this.rootModuleOptions,
-      directives: [...specifiedDirectives, ...federationDirectives],
+      directives: [...specifiedDirectives, ...directivesWithNoDefinitionNeeded],
       resolvers: resolversClasses as NonEmptyArray<ClassType>,
       orphanedTypes,
       container,
     });
 
-    const schema = buildFederatedSchema({
-      typeDefs: gql(printSchema(baseSchema)),
+    const schema = buildSubgraphSchema({
+      typeDefs: gql(printSubgraphSchema(baseSchema)),
       resolvers: createResolversMap(baseSchema) as GraphQLResolverMap<any>,
     });
 
@@ -75,9 +79,20 @@ export default class TypeGraphQLFederationOptionsFactory
       addResolversToSchema(schema, referenceResolvers);
     }
 
+    const transformSchemaInternal = async (
+      executableSchema: GraphQLSchema,
+    ): Promise<GraphQLSchema> => {
+      const transformedSchemaInternal = executableSchema
+        ? mergeSchemas({ schemas: [schema, executableSchema] })
+        : schema;
+      return transformSchema
+        ? transformSchema(transformedSchemaInternal)
+        : transformedSchemaInternal;
+    };
+
     return {
       ...this.rootModuleOptions,
-      schema,
+      transformSchema: transformSchemaInternal,
     };
   }
 }

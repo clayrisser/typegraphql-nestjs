@@ -1,15 +1,16 @@
 import { ApolloDriver } from "@nestjs/apollo";
 import { Module } from "@nestjs/common";
+import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
+
 import { TypeGraphQLModule } from "../../src";
 import { LoggingMiddleware } from "./logging/middleware";
 
 import RecipeModule from "./recipe/module";
 import LoggingModule from "./logging/module";
-import { ApolloDriver } from "@nestjs/apollo";
 
 @Module({
   imports: [
-    TypeGraphQLModule.forRoot({
+    TypeGraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       emitSchemaFile: true,
       validate: false,
