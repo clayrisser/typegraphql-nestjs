@@ -1,6 +1,7 @@
 # app
 /lib
 /esm
+/.yarn/install-state.gz
 
 # nodejs
 *.log
