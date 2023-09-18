@@ -1,9 +1,10 @@
-import { GqlModuleOptions, GraphQLModule } from '@nestjs/graphql';
-import { Module, DynamicModule } from '@nestjs/common';
 import OptionsPreparatorService from './prepare-options.service';
 import TypeGraphQLOptionsFactory from './typegraphql-options.factory';
+import type { DynamicModule } from '@nestjs/common';
+import { GraphQLModule } from '@nestjs/graphql';
+import { Module } from '@nestjs/common';
 import { TYPEGRAPHQL_ROOT_MODULE_OPTIONS, TYPEGRAPHQL_FEATURE_MODULE_OPTIONS } from './constants';
-import {
+import type {
   TypeGraphQLFeatureModuleOptions,
   TypeGraphQLRootModuleAsyncOptions,
   TypeGraphQLRootModuleOptions,
@@ -22,18 +23,15 @@ export class TypeGraphQLModule {
     };
   }
 
-  static forRoot<TOptions extends Record<string, any> = GqlModuleOptions>(
-    options: TypeGraphQLRootModuleOptions<TOptions>,
-  ): DynamicModule {
+  static forRoot(options: TypeGraphQLRootModuleOptions = {}): DynamicModule {
     const dynamicGraphQLModule = GraphQLModule.forRootAsync({
       driver: options.driver,
-      useClass: TypeGraphQLOptionsFactory as any,
+      useClass: TypeGraphQLOptionsFactory,
     });
-
     return {
       ...dynamicGraphQLModule,
       providers: [
-        ...(dynamicGraphQLModule.providers ?? []),
+        ...dynamicGraphQLModule.providers!,
         OptionsPreparatorService,
         {
           provide: TYPEGRAPHQL_ROOT_MODULE_OPTIONS,
@@ -43,19 +41,16 @@ export class TypeGraphQLModule {
     };
   }
 
-  static forRootAsync<TOptions extends Record<string, any> = GqlModuleOptions>(
-    options: TypeGraphQLRootModuleAsyncOptions<TOptions>,
-  ): DynamicModule {
+  static forRootAsync(options: TypeGraphQLRootModuleAsyncOptions): DynamicModule {
     const dynamicGraphQLModule = GraphQLModule.forRootAsync({
       driver: options.driver,
       imports: options.imports,
-      useClass: TypeGraphQLOptionsFactory as any,
+      useClass: TypeGraphQLOptionsFactory,
     });
-
     return {
       ...dynamicGraphQLModule,
       providers: [
-        ...(dynamicGraphQLModule.providers ?? []),
+        ...dynamicGraphQLModule.providers!,
         OptionsPreparatorService,
         {
           inject: options.inject,

@@ -1,5 +1,5 @@
 import type { ResolverData } from 'type-graphql';
-import { createParamDecorator as nestjsCreateParamDecorator, applyDecorators } from '@nestjs/common';
+import { createParamDecorator as nestjsCreateParamDecorator } from '@nestjs/common';
 
 let typeGraphqlCreateParamDecorator: any;
 try {
@@ -9,15 +9,18 @@ try {
   // void
 }
 
-export declare type CustomParamFactory<TData = any, TInput = any, TOutput = any, TContextType = any> = (
+export declare type CustomParamFactory<TData = any, TInput = any, TOutput = any, TContextType extends object = any> = (
   data?: TData,
   input?: TInput,
   resolverData?: ResolverData<TContextType>,
 ) => TOutput;
 
-export function createParamDecorator<FactoryData = any, FactoryInput = any, FactoryOutput = any, TContextType = any>(
-  factory: CustomParamFactory<FactoryData, FactoryInput, FactoryOutput>,
-) {
+export function createParamDecorator<
+  FactoryData = any,
+  FactoryInput = any,
+  FactoryOutput = any,
+  TContextType extends object = any,
+>(factory: CustomParamFactory<FactoryData, FactoryInput, FactoryOutput>) {
   const nestjsParamDecorator = nestjsCreateParamDecorator((data: FactoryData, input: FactoryInput) => {
     return factory(data, input);
   })();

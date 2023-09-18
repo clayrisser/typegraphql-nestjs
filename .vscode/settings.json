@@ -1,33 +1,4 @@
 {
-  "cSpell.words": [
-    "ada",
-    "cls",
-    "corejs",
-    "cspell",
-    "defs",
-    "envcache",
-    "fastify",
-    "fedaration",
-    "globals",
-    "gql",
-    "graphql",
-    "hasown",
-    "kasi",
-    "lang",
-    "metatype",
-    "middlewares",
-    "nestjs",
-    "nullable",
-    "preparator",
-    "resolvers",
-    "schemas",
-    "subgraph",
-    "typegraphql",
-    "unlink",
-    "upc",
-    "utf",
-    "vscode"
-  ],
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },

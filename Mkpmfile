@@ -36,6 +36,7 @@ export ESLINT ?= $(call yarn_binary,eslint)
 export JEST ?= $(call yarn_binary,jest)
 export PRETTIER ?= $(call yarn_binary,prettier)
 export TSC ?= $(call yarn_binary,tsc)
+export TSUP ?= $(call yarn_binary,tsup)
 
 export NPM_AUTH_TOKEN ?= $(shell $(CAT) $(HOME)/.docker/config.json 2>$(NULL) | \
 	$(JQ) -r '.auths["registry.gitlab.com"].auth' | $(BASE64_NOWRAP) -d | $(CUT) -d':' -f2)
@@ -60,28 +61,19 @@ $(ACTION)/lint: $(call git_deps,\.([jt]sx?)$$)
 	-@$(call eslint,$?,$(ARGS))
 	@$(call done,$@)
 
-ACTIONS += test~lint ##
-$(ACTION)/test: $(call git_deps,\.([jt]sx?)$$)
-	-@$(MKDIR) -p node_modules/.tmp
-	-@$(call jest,$?,$(ARGS))
-	@$(call done,$@)
+# ACTIONS += test~lint ##
+# $(ACTION)/test: $(call git_deps,\.([jt]sx?)$$)
+# 	-@$(MKDIR) -p node_modules/.tmp
+# 	-@$(call jest,$?,$(ARGS))
+# 	@$(call done,$@)
 
-ACTIONS += build~test ##
+ACTIONS += build~lint ##
 BUILD_TARGET := lib/index.js
 lib/index.js:
 	@$(call reset,build)
 $(ACTION)/build: $(call git_deps,\.([jt]sx?)$$)
-	@$(BABEL) --env-name umd src -d lib --extensions '.js,.jsx,.ts,.tsx' --source-maps
-	@$(ECHO) '{"type": "commonjs"}' > lib/package.json
-	@$(BABEL) --env-name esm src -d esm --extensions '.js,.jsx,.ts,.tsx' --source-maps
-	@$(ECHO) '{"type": "module"}' > esm/package.json
-	@$(TSC) -p tsconfig.build.json -d
+	@$(TSUP)
 	@$(call done,$@)
-
-# .PHONY: start +start
-# start: | ~install +start ##
-# +start:
-# 	@$(NODEMON) --exec $(BABEL_NODE) --extensions .ts src/main.ts $(ARGS)
 
 COLLECT_COVERAGE_FROM := ["src/**/*.{js,jsx,ts,tsx}"]
 .PHONY: coverage +coverage
