@@ -5,9 +5,9 @@
  * Author: Clay Risser
  * -----
  * Last Modified: 24-10-2022 04:51:56
- * Modified By: Risser Labs LLC <info@risserlabs.com>
+ * Modified By: BitSpur <info@risserlabs.com>
  * -----
- * Risser Labs LLC (c) Copyright 2021 - 2022
+ * BitSpur (c) Copyright 2021 - 2022
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

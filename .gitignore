@@ -36,7 +36,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # mkpm
-.mkpm/*
-**/.mkpm/*
-!/.mkpm/.cache.tar.gz
-!/.mkpm/.bootstrap.mk
+.mkpm/mkpm

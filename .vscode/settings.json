@@ -2,13 +2,16 @@
   "cSpell.words": [
     "ada",
     "cls",
+    "corejs",
     "cspell",
     "defs",
+    "envcache",
     "fastify",
     "fedaration",
     "globals",
     "gql",
     "graphql",
+    "hasown",
     "kasi",
     "lang",
     "metatype",
@@ -43,5 +46,8 @@
   "editor.formatOnSave": true,
   "explorer.autoReveal": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "typescript.updateImportsOnFileMove.enabled": "always"
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "files.associations": {
+    "Mkpmfile": "makefile"
+  }
 }
